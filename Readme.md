@@ -1,6 +1,6 @@
 # LTI - Sistema de Seguimiento de Talento
 
-Este proyecto LTI es una aplicación full-stack basado en aplicaciones ATS. 
+Este proyecto LTI va ser una aplicación full-stack basado en aplicaciones ATS. El propósito de este ejercicio es la instalación base del proyecto usando AI con Cursor.
 
 ## Explicación de Arquitectura
 - **Backend**: La arquitectura del backend esta definida en la documentacion ubicada en:
