@@ -1,0 +1,116 @@
+services:
+  # =============================================
+  # API Backend Service - Desarrollo
+  # =============================================
+  api-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: lti-ats-api-dev
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+      - "9229:9229"  # Puerto para debugging
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      DATABASE_URL: postgresql://postgres:postgres123@db:5432/lti_ats_db?schema=public
+      JWT_SECRET: dev-jwt-secret-not-for-production
+      JWT_ACCESS_EXPIRY: 15m
+      JWT_REFRESH_EXPIRY: 7d
+      BCRYPT_ROUNDS: 5  # Menos rounds para desarrollo más rápido
+      STORAGE_TYPE: local
+      UPLOAD_PATH: /app/uploads
+      MAX_FILE_SIZE: 10485760
+      ALLOWED_FILE_TYPES: pdf,docx,mp4,mp3,jpg,jpeg,png
+      ALLOWED_ORIGINS: http://localhost:3001,http://localhost:3000
+    volumes:
+      - .:/app  # Hot reload - monta todo el código fuente
+      - /app/node_modules  # Evita sobrescribir node_modules
+      - uploads_data:/app/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - lti-network
+    command: npm run dev
+
+  # =============================================
+  # PostgreSQL Database
+  # =============================================
+  db:
+    image: postgres:15-alpine
+    container_name: lti-ats-db-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: lti_ats_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+      - ./prisma/seed.sql:/docker-entrypoint-initdb.d/seed.sql  # Datos de prueba
+    ports:
+      - "5432:5432"
+    networks:
+      - lti-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d lti_ats_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # =============================================
+  # pgAdmin - Interfaz gráfica para PostgreSQL
+  # =============================================
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: lti-ats-pgadmin-dev
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@lti-ats.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin_data_dev:/var/lib/pgadmin
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    networks:
+      - lti-network
+
+  # =============================================
+  # MailPit - Servidor de email para desarrollo
+  # =============================================
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: lti-ats-mailpit-dev
+    restart: unless-stopped
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+    ports:
+      - "8025:8025"  # Web UI
+      - "1025:1025"  # SMTP
+    networks:
+      - lti-network
+
+# =============================================
+# Volumes para persistencia de datos
+# =============================================
+volumes:
+  postgres_data_dev:
+    driver: local
+  pgadmin_data_dev:
+    driver: local
+  uploads_data:
+    driver: local
+
+# =============================================
+# Red personalizada
+# =============================================
+networks:
+  lti-network:
+    driver: bridge 

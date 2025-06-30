@@ -1,0 +1,200 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "add": "Agregar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "export": "Exportar",
+    "import": "Importar",
+    "yes": "Sí",
+    "no": "No",
+    "close": "Cerrar",
+    "submit": "Enviar",
+    "reset": "Restablecer",
+    "back": "Volver",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "confirm": "Confirmar",
+    "select": "Seleccionar",
+    "actions": "Acciones",
+    "status": "Estado",
+    "created_at": "Creado el",
+    "updated_at": "Actualizado el",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "address": "Dirección",
+    "description": "Descripción"
+  },
+  "auth": {
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
+    "register": "Registrarse",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "confirm_password": "Confirmar contraseña",
+    "forgot_password": "¿Olvidaste tu contraseña?",
+    "remember_me": "Recordarme",
+    "login_success": "Inicio de sesión exitoso",
+    "login_error": "Error al iniciar sesión",
+    "logout_success": "Sesión cerrada exitosamente",
+    "invalid_credentials": "Credenciales inválidas",
+    "first_name": "Nombre",
+    "last_name": "Apellido"
+  },
+  "navigation": {
+    "dashboard": "Panel de control",
+    "candidates": "Candidatos",
+    "jobs": "Vacantes",
+    "applications": "Aplicaciones",
+    "interviews": "Entrevistas",
+    "recruiters": "Reclutadores",
+    "admin": "Administración",
+    "users": "Usuarios",
+    "settings": "Configuración",
+    "profile": "Perfil",
+    "reports": "Reportes"
+  },
+  "dashboard": {
+    "welcome": "Bienvenido al Sistema ATS",
+    "overview": "Resumen",
+    "recent_activities": "Actividades recientes",
+    "statistics": "Estadísticas",
+    "quick_actions": "Acciones rápidas"
+  },
+  "candidates": {
+    "title": "Candidatos",
+    "add_candidate": "Agregar candidato",
+    "candidate_list": "Lista de candidatos",
+    "candidate_profile": "Perfil del candidato",
+    "skills": "Habilidades",
+    "experience": "Experiencia",
+    "education": "Educación",
+    "resume": "Currículum",
+    "portfolio": "Portafolio",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "salary_expectation": "Expectativa salarial",
+    "location": "Ubicación",
+    "status": {
+      "active": "Activo",
+      "inactive": "Inactivo",
+      "blacklisted": "Lista negra"
+    }
+  },
+  "jobs": {
+    "title": "Vacantes",
+    "add_job": "Agregar vacante",
+    "job_list": "Lista de vacantes",
+    "job_details": "Detalles de la vacante",
+    "requirements": "Requisitos",
+    "benefits": "Beneficios",
+    "salary_range": "Rango salarial",
+    "job_type": "Tipo de trabajo",
+    "department": "Departamento",
+    "publish": "Publicar",
+    "unpublish": "Despublicar",
+    "types": {
+      "full_time": "Tiempo completo",
+      "part_time": "Medio tiempo",
+      "contract": "Contrato",
+      "internship": "Prácticas",
+      "remote": "Remoto",
+      "hybrid": "Híbrido"
+    },
+    "status": {
+      "draft": "Borrador",
+      "published": "Publicada",
+      "paused": "Pausada",
+      "closed": "Cerrada",
+      "cancelled": "Cancelada"
+    }
+  },
+  "applications": {
+    "title": "Aplicaciones",
+    "application_details": "Detalles de la aplicación",
+    "review": "Revisar",
+    "approve": "Aprobar",
+    "reject": "Rechazar",
+    "schedule_interview": "Programar entrevista",
+    "notes": "Notas",
+    "score": "Puntuación",
+    "stage": "Etapa",
+    "status": {
+      "applied": "Aplicada",
+      "reviewing": "En revisión",
+      "shortlisted": "Preseleccionada",
+      "interview_scheduled": "Entrevista programada",
+      "interviewed": "Entrevistada",
+      "offer_sent": "Oferta enviada",
+      "offer_accepted": "Oferta aceptada",
+      "offer_rejected": "Oferta rechazada",
+      "rejected": "Rechazada",
+      "withdrawn": "Retirada"
+    }
+  },
+  "interviews": {
+    "title": "Entrevistas",
+    "schedule": "Programar",
+    "reschedule": "Reprogramar",
+    "cancel": "Cancelar",
+    "feedback": "Retroalimentación",
+    "rating": "Calificación",
+    "duration": "Duración",
+    "interviewer": "Entrevistador",
+    "date_time": "Fecha y hora",
+    "types": {
+      "phone": "Teléfono",
+      "video": "Video",
+      "onsite": "Presencial",
+      "technical": "Técnica",
+      "panel": "Panel"
+    },
+    "status": {
+      "scheduled": "Programada",
+      "completed": "Completada",
+      "cancelled": "Cancelada",
+      "no_show": "No se presentó",
+      "rescheduled": "Reprogramada"
+    }
+  },
+  "settings": {
+    "title": "Configuración",
+    "general": "General",
+    "appearance": "Apariencia",
+    "language": "Idioma",
+    "theme": "Tema",
+    "notifications": "Notificaciones",
+    "privacy": "Privacidad",
+    "security": "Seguridad",
+    "account": "Cuenta",
+    "theme_modes": {
+      "light": "Claro",
+      "dark": "Oscuro",
+      "system": "Sistema"
+    },
+    "languages": {
+      "es": "Español",
+      "en": "Inglés"
+    }
+  },
+  "errors": {
+    "generic": "Ha ocurrido un error",
+    "network": "Error de conexión",
+    "not_found": "No encontrado",
+    "unauthorized": "No autorizado",
+    "forbidden": "Acceso denegado",
+    "validation": "Error de validación",
+    "server": "Error del servidor"
+  },
+  "success": {
+    "saved": "Guardado exitosamente",
+    "updated": "Actualizado exitosamente",
+    "deleted": "Eliminado exitosamente",
+    "created": "Creado exitosamente"
+  }
+} 

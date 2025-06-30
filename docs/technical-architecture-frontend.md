@@ -12,7 +12,7 @@
 - **Testing**: Básico desde el inicio (Jest + Testing Library).
 - **SEO**: Importante.
 
-## Estructura del Proyecto (basada en features)
+## Estructura del Frontend (basada en features)
 El frontend va estar dentro de una carpeta llamada "frontend" en el directorio raiz del proyecto.
 ```
 /src

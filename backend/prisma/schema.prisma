@@ -1,0 +1,295 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ===================================
+// MODELOS DE AUTENTICACIÓN Y USUARIOS
+// ===================================
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  firstName String   @map("first_name")
+  lastName  String   @map("last_name")
+  avatar    String?
+  phone     String?
+  isActive  Boolean  @default(true) @map("is_active")
+  
+  // Timestamps
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  
+  // Relaciones
+  roles     UserRole[]
+  
+  @@map("users")
+}
+
+model Role {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  isActive    Boolean  @default(true) @map("is_active")
+  
+  // Timestamps
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  
+  // Relaciones
+  users       UserRole[]
+  permissions RolePermission[]
+  
+  @@map("roles")
+}
+
+model Permission {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  resource    String   // e.g., 'users', 'candidates', 'jobs'
+  action      String   // e.g., 'create', 'read', 'update', 'delete'
+  
+  // Timestamps
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  
+  // Relaciones
+  roles RolePermission[]
+  
+  @@map("permissions")
+}
+
+model UserRole {
+  userId String @map("user_id")
+  roleId String @map("role_id")
+  
+  // Timestamps
+  assignedAt DateTime @default(now()) @map("assigned_at")
+  
+  // Relaciones
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  
+  @@id([userId, roleId])
+  @@map("user_roles")
+}
+
+model RolePermission {
+  roleId       String @map("role_id")
+  permissionId String @map("permission_id")
+  
+  // Timestamps
+  assignedAt DateTime @default(now()) @map("assigned_at")
+  
+  // Relaciones
+  role       Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  
+  @@id([roleId, permissionId])
+  @@map("role_permissions")
+}
+
+// ===================================
+// MODELOS DEL SISTEMA ATS
+// ===================================
+
+model Candidate {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  firstName String   @map("first_name")
+  lastName  String   @map("last_name")
+  phone     String?
+  resume    String?  // URL del CV
+  linkedIn  String?  @map("linkedin_url")
+  github    String?  @map("github_url")
+  portfolio String?  @map("portfolio_url")
+  
+  // Información adicional
+  summary   String?
+  skills    String[] // Array de habilidades
+  experience Int?    // Años de experiencia
+  salary    Decimal? // Expectativa salarial
+  location  String?
+  
+  // Estado
+  status    CandidateStatus @default(ACTIVE)
+  
+  // Timestamps
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  
+  // Relaciones
+  applications Application[]
+  files        File[]
+  
+  @@map("candidates")
+}
+
+model Job {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  requirements String
+  location    String
+  jobType     JobType  @map("job_type")
+  salaryMin   Decimal? @map("salary_min")
+  salaryMax   Decimal? @map("salary_max")
+  department  String?
+  
+  // Estado
+  status      JobStatus @default(DRAFT)
+  isActive    Boolean   @default(true) @map("is_active")
+  
+  // Timestamps
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+  
+  // Relaciones
+  applications Application[]
+  
+  @@map("jobs")
+}
+
+model Application {
+  id          String   @id @default(cuid())
+  candidateId String   @map("candidate_id")
+  jobId       String   @map("job_id")
+  
+  // Estado de la aplicación
+  status      ApplicationStatus @default(APPLIED)
+  stage       String?          // Etapa actual del proceso
+  notes       String?          // Notas del reclutador
+  score       Int?             // Puntuación del candidato
+  
+  // Timestamps
+  appliedAt DateTime @default(now()) @map("applied_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  
+  // Relaciones
+  candidate Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  job       Job       @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  interviews Interview[]
+  
+  @@unique([candidateId, jobId])
+  @@map("applications")
+}
+
+model Interview {
+  id            String   @id @default(cuid())
+  applicationId String   @map("application_id")
+  
+  // Detalles de la entrevista
+  title         String
+  description   String?
+  type          InterviewType
+  scheduledAt   DateTime @map("scheduled_at")
+  duration      Int?     // Duración en minutos
+  location      String?  // Presencial o link para virtual
+  
+  // Estado
+  status        InterviewStatus @default(SCHEDULED)
+  feedback      String?
+  rating        Int?     // Rating de 1-5
+  
+  // Timestamps
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  
+  // Relaciones
+  application Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  @@map("interviews")
+}
+
+// ===================================
+// MODELO DE ARCHIVOS
+// ===================================
+
+model File {
+  id          String   @id @default(cuid())
+  filename    String
+  originalName String @map("original_name")
+  mimeType    String   @map("mime_type")
+  size        Int      // Tamaño en bytes
+  url         String   // URL o path del archivo
+  
+  // Relaciones opcionales
+  candidateId String?  @map("candidate_id")
+  
+  // Timestamps
+  uploadedAt DateTime @default(now()) @map("uploaded_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  
+  // Relaciones
+  candidate Candidate? @relation(fields: [candidateId], references: [id], onDelete: SetNull)
+  
+  @@map("files")
+}
+
+// ===================================
+// ENUMS
+// ===================================
+
+enum CandidateStatus {
+  ACTIVE
+  INACTIVE
+  BLACKLISTED
+}
+
+enum JobType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  INTERNSHIP
+  REMOTE
+  HYBRID
+}
+
+enum JobStatus {
+  DRAFT
+  PUBLISHED
+  PAUSED
+  CLOSED
+  CANCELLED
+}
+
+enum ApplicationStatus {
+  APPLIED
+  REVIEWING
+  SHORTLISTED
+  INTERVIEW_SCHEDULED
+  INTERVIEWED
+  OFFER_SENT
+  OFFER_ACCEPTED
+  OFFER_REJECTED
+  REJECTED
+  WITHDRAWN
+}
+
+enum InterviewType {
+  PHONE
+  VIDEO
+  ONSITE
+  TECHNICAL
+  PANEL
+}
+
+enum InterviewStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+  RESCHEDULED
+}

@@ -1,0 +1,170 @@
+services:
+  # =============================================
+  # API Backend Service
+  # =============================================
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: lti-ats-api
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://postgres:postgres123@db:5432/lti_ats_db?schema=public
+      JWT_SECRET: super-secret-jwt-key-change-in-production
+      JWT_ACCESS_EXPIRY: 15m
+      JWT_REFRESH_EXPIRY: 7d
+      BCRYPT_ROUNDS: 10
+      STORAGE_TYPE: local
+      UPLOAD_PATH: /app/uploads
+      MAX_FILE_SIZE: 10485760
+      ALLOWED_FILE_TYPES: pdf,docx,mp4,mp3,jpg,jpeg,png
+      ALLOWED_ORIGINS: http://localhost:3001,http://localhost:3000
+    volumes:
+      - uploads_data:/app/uploads
+      - ./uploads:/app/uploads  # Para desarrollo local
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - lti-network
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # =============================================
+  # PostgreSQL Database
+  # =============================================
+  db:
+    image: postgres:15-alpine
+    container_name: lti-ats-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: lti_ats_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - lti-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d lti_ats_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # =============================================
+  # pgAdmin - Interfaz gráfica para PostgreSQL
+  # =============================================
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: lti-ats-pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@lti-ats.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    networks:
+      - lti-network
+
+  # =============================================
+  # MinIO - Almacenamiento S3 compatible (opcional)
+  # =============================================
+  minio:
+    image: minio/minio:latest
+    container_name: lti-ats-minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin123
+    volumes:
+      - minio_data:/data
+    ports:
+      - "9000:9000"  # MinIO API
+      - "9001:9001"  # MinIO Console
+    networks:
+      - lti-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  # =============================================
+  # MailPit - Servidor de email para desarrollo
+  # =============================================
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: lti-ats-mailpit
+    restart: unless-stopped
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+    ports:
+      - "8025:8025"  # Web UI
+      - "1025:1025"  # SMTP
+    networks:
+      - lti-network
+
+  # =============================================
+  # Redis - Cache y sesiones (opcional)
+  # =============================================
+  redis:
+    image: redis:7-alpine
+    container_name: lti-ats-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - lti-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+# =============================================
+# Volumes para persistencia de datos
+# =============================================
+volumes:
+  postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+  uploads_data:
+    driver: local
+  minio_data:
+    driver: local
+  redis_data:
+    driver: local
+
+# =============================================
+# Red personalizada
+# =============================================
+networks:
+  lti-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16 

@@ -1,0 +1,200 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "import": "Import",
+    "yes": "Yes",
+    "no": "No",
+    "close": "Close",
+    "submit": "Submit",
+    "reset": "Reset",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "confirm": "Confirm",
+    "select": "Select",
+    "actions": "Actions",
+    "status": "Status",
+    "created_at": "Created at",
+    "updated_at": "Updated at",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "description": "Description"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm password",
+    "forgot_password": "Forgot your password?",
+    "remember_me": "Remember me",
+    "login_success": "Login successful",
+    "login_error": "Login error",
+    "logout_success": "Logout successful",
+    "invalid_credentials": "Invalid credentials",
+    "first_name": "First name",
+    "last_name": "Last name"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "candidates": "Candidates",
+    "jobs": "Jobs",
+    "applications": "Applications",
+    "interviews": "Interviews",
+    "recruiters": "Recruiters",
+    "admin": "Administration",
+    "users": "Users",
+    "settings": "Settings",
+    "profile": "Profile",
+    "reports": "Reports"
+  },
+  "dashboard": {
+    "welcome": "Welcome to ATS System",
+    "overview": "Overview",
+    "recent_activities": "Recent activities",
+    "statistics": "Statistics",
+    "quick_actions": "Quick actions"
+  },
+  "candidates": {
+    "title": "Candidates",
+    "add_candidate": "Add candidate",
+    "candidate_list": "Candidate list",
+    "candidate_profile": "Candidate profile",
+    "skills": "Skills",
+    "experience": "Experience",
+    "education": "Education",
+    "resume": "Resume",
+    "portfolio": "Portfolio",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "salary_expectation": "Salary expectation",
+    "location": "Location",
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "blacklisted": "Blacklisted"
+    }
+  },
+  "jobs": {
+    "title": "Jobs",
+    "add_job": "Add job",
+    "job_list": "Job list",
+    "job_details": "Job details",
+    "requirements": "Requirements",
+    "benefits": "Benefits",
+    "salary_range": "Salary range",
+    "job_type": "Job type",
+    "department": "Department",
+    "publish": "Publish",
+    "unpublish": "Unpublish",
+    "types": {
+      "full_time": "Full-time",
+      "part_time": "Part-time",
+      "contract": "Contract",
+      "internship": "Internship",
+      "remote": "Remote",
+      "hybrid": "Hybrid"
+    },
+    "status": {
+      "draft": "Draft",
+      "published": "Published",
+      "paused": "Paused",
+      "closed": "Closed",
+      "cancelled": "Cancelled"
+    }
+  },
+  "applications": {
+    "title": "Applications",
+    "application_details": "Application details",
+    "review": "Review",
+    "approve": "Approve",
+    "reject": "Reject",
+    "schedule_interview": "Schedule interview",
+    "notes": "Notes",
+    "score": "Score",
+    "stage": "Stage",
+    "status": {
+      "applied": "Applied",
+      "reviewing": "Reviewing",
+      "shortlisted": "Shortlisted",
+      "interview_scheduled": "Interview scheduled",
+      "interviewed": "Interviewed",
+      "offer_sent": "Offer sent",
+      "offer_accepted": "Offer accepted",
+      "offer_rejected": "Offer rejected",
+      "rejected": "Rejected",
+      "withdrawn": "Withdrawn"
+    }
+  },
+  "interviews": {
+    "title": "Interviews",
+    "schedule": "Schedule",
+    "reschedule": "Reschedule",
+    "cancel": "Cancel",
+    "feedback": "Feedback",
+    "rating": "Rating",
+    "duration": "Duration",
+    "interviewer": "Interviewer",
+    "date_time": "Date & time",
+    "types": {
+      "phone": "Phone",
+      "video": "Video",
+      "onsite": "On-site",
+      "technical": "Technical",
+      "panel": "Panel"
+    },
+    "status": {
+      "scheduled": "Scheduled",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "no_show": "No show",
+      "rescheduled": "Rescheduled"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "general": "General",
+    "appearance": "Appearance",
+    "language": "Language",
+    "theme": "Theme",
+    "notifications": "Notifications",
+    "privacy": "Privacy",
+    "security": "Security",
+    "account": "Account",
+    "theme_modes": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "languages": {
+      "es": "Spanish",
+      "en": "English"
+    }
+  },
+  "errors": {
+    "generic": "An error occurred",
+    "network": "Network error",
+    "not_found": "Not found",
+    "unauthorized": "Unauthorized",
+    "forbidden": "Access denied",
+    "validation": "Validation error",
+    "server": "Server error"
+  },
+  "success": {
+    "saved": "Successfully saved",
+    "updated": "Successfully updated",
+    "deleted": "Successfully deleted",
+    "created": "Successfully created"
+  }
+} 

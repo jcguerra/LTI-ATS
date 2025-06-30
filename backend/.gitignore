@@ -1,0 +1,261 @@
+# ==========================================
+# LTI ATS Backend - .gitignore
+# ==========================================
+
+# ==========================================
+# ARCHIVOS SENSIBLES - ¡NUNCA COMMITEAR!
+# ==========================================
+# Variables de entorno
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.staging
+
+# Archivos de configuración sensibles
+config/secrets.json
+secrets/
+certificates/
+*.pem
+*.key
+*.cert
+*.crt
+*.p12
+
+# ==========================================
+# NODE.JS
+# ==========================================
+# Dependencias
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+.nyc_output/
+
+# Grunt intermediate storage
+.grunt
+
+# Bower dependency directory
+bower_components
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# ==========================================
+# TYPESCRIPT
+# ==========================================
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# TypeScript cache
+*.tsbuildinfo
+
+# ==========================================
+# PRISMA
+# ==========================================
+# Prisma migrations (comentar si quieres versionar migraciones)
+# prisma/migrations/
+
+# Prisma client generated files (se genera automáticamente)
+# node_modules/.prisma/
+
+# ==========================================
+# ARCHIVOS DE DESARROLLO
+# ==========================================
+# Logs
+logs/
+*.log
+
+# Testing
+test-results/
+coverage/
+.nyc_output/
+junit.xml
+
+# Jest
+.jest/
+
+# ==========================================
+# UPLOADS Y ARCHIVOS DEL USUARIO
+# ==========================================
+# Directorio de uploads (archivos subidos por usuarios)
+uploads/
+temp-uploads/
+user-files/
+
+# Archivos temporales de procesamiento
+temp/
+tmp/
+.tmp/
+
+# ==========================================
+# BASE DE DATOS
+# ==========================================
+# Archivos de base de datos SQLite (si se usa para desarrollo)
+*.db
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+
+# Dumps de base de datos
+*.sql
+*.dump
+backup/
+backups/
+
+# ==========================================
+# DOCKER (específico del backend)
+# ==========================================
+# Archivos de Docker locales
+.docker/
+docker-data/
+
+# Volúmenes de datos locales
+postgres-data/
+redis-data/
+minio-data/
+
+# Override de docker-compose
+docker-compose.override.yml
+
+# ==========================================
+# EDITORES E IDEs
+# ==========================================
+# Visual Studio Code
+.vscode/
+.history/
+*.code-workspace
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ==========================================
+# SISTEMAS OPERATIVOS
+# ==========================================
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# ==========================================
+# CACHE Y TEMPORALES
+# ==========================================
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# ==========================================
+# DOCUMENTACIÓN Y ANÁLISIS
+# ==========================================
+# Reportes generados
+reports/
+metrics/
+analysis/
+
+# Documentación temporal
+docs/temp/
+*.tmp.md
+
+# ==========================================
+# ARCHIVOS ESPECÍFICOS DEL PROYECTO
+# ==========================================
+# Archivos de sesión
+sessions/
+
+# Archivos de queue/jobs
+queue-data/
+
+# Archivos de exportación
+exports/
+export-*.csv
+export-*.xlsx
+
+# ==========================================
+# HERRAMIENTAS DE DESARROLLO
+# ==========================================
+# Storybook
+.storybook/dist/
+
+# Webpack
+.webpack/
+
+# Parcel
+.parcel-cache/
+
+# ==========================================
+# MONITOREO Y PROFILING
+# ==========================================
+# New Relic
+newrelic_agent.log
+
+# CPU profiles
+*.cpuprofile
+
+# Heap snapshots
+*.heapsnapshot
+
+# ==========================================
+# VARIABLES ESPECÍFICAS DEL ENTORNO
+# ==========================================
+# Archivos de configuración local
+.local/
+local.json
+local.config.js 
