@@ -1,6 +1,6 @@
 # LTI - Sistema de Seguimiento de Talento
 
-Este proyecto LTI va ser una aplicación full-stack basado en aplicaciones ATS. El propósito de este ejercicio es la instalación base del proyecto usando AI con Cursor sin agregar una liena de código. Se inició la definición de las arquitecturas del frontend y backend usando ChatGTP, haciendole preguntas básicas de algunas tecnologias y el uso entre ellas para luego hacer la definiciones de ambas partes. Dejo la conversacion con [ChatGTP](https://chatgpt.com/share/68628ef9-fdc8-8013-933c-1847eeaad14b)
+Este proyecto LTI va ser una aplicación full-stack basado en aplicaciones ATS. El propósito de este ejercicio es la instalación base del proyecto usando AI con Cursor sin agregar una linea de código. Se inició la definición de las arquitecturas del frontend y backend usando ChatGTP, haciendole preguntas básicas de algunas tecnologias y el uso entre ellas para luego hacer la definiciones de ambas partes. Dejo la conversacion con [ChatGTP](https://chatgpt.com/share/68628ef9-fdc8-8013-933c-1847eeaad14b)
 
 ## Explicación de Arquitectura
 - **Backend**: La arquitectura del backend esta definida en la documentacion ubicada en:
