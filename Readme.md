@@ -13,3 +13,7 @@ Este proyecto LTI es una aplicación full-stack basado en aplicaciones ATS.
 ## Estructura del Proyecto
 El proyecto está dividido en dos directorios principales: frontend y backend.
 
+### Prompt
+- **Instalación del Proyecto Base**: La interacción con el modelo AI para la configuración inicial del proyecto base está documentada en:
+``` /prompt/cursor_iniciar_instalacion.md ```
+

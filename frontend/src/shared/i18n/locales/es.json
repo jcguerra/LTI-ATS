@@ -47,7 +47,7 @@
     "last_name": "Apellido"
   },
   "navigation": {
-    "dashboard": "Panel de control",
+    "dashboard": "LTI Panel de control",
     "candidates": "Candidatos",
     "jobs": "Vacantes",
     "applications": "Aplicaciones",
